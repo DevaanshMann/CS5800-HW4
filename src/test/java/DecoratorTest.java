@@ -1,0 +1,2 @@
+public class DecoratorTest {
+}
