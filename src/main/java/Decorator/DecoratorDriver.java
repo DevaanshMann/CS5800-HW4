@@ -23,4 +23,3 @@ public class DecoratorDriver {
         System.out.printf("Total after discount: $%.2f%n", totalAfterDiscount);
     }
 }
-
