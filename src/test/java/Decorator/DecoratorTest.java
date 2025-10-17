@@ -1,5 +1,3 @@
-
-
 package Decorator;
 
 import org.junit.jupiter.api.*;

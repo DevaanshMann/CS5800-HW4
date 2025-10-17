@@ -1,5 +1,3 @@
-
-
 package Bridge;
 
 import org.junit.jupiter.api.*;

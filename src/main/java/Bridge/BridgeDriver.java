@@ -1,5 +1,3 @@
-
-
 package Bridge;
 
 public class BridgeDriver {
