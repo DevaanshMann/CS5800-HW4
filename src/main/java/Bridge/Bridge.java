@@ -16,34 +16,37 @@ abstract class PaymentNotification {
     public abstract void notifyCustomer();
 }
 
-// ===== Implementor =====
-interface NotificationChannel { void send(String to, String message); }
+interface NotificationChannel {
+    void send(String to, String message);
+}
 
-// ===== Concrete Implementors =====
 class EmailChannel implements NotificationChannel {
-    @Override public void send(String to, String message) {
+    @Override
+    public void send(String to, String message) {
         System.out.println("[EMAIL] to " + to + " :: " + message);
     }
 }
 class SmsChannel implements NotificationChannel {
-    @Override public void send(String to, String message) {
+    @Override
+    public void send(String to, String message) {
         System.out.println("[SMS] to " + to + " :: " + message);
     }
 }
 class PushChannel implements NotificationChannel {
-    @Override public void send(String to, String message) {
+    @Override
+    public void send(String to, String message) {
         System.out.println("[PUSH] to " + to + " :: " + message);
     }
 }
 
-// ===== Refined Abstractions =====
 class OnlinePaymentNotification extends PaymentNotification {
-    private final String method; // e.g., "Credit Card", "PayPal"
+    private final String method;
     public OnlinePaymentNotification(NotificationChannel c, String customer, double amount, String method) {
         super(c, customer, amount);
         this.method = method;
     }
-    @Override public void notifyCustomer() {
+    @Override
+    public void notifyCustomer() {
         channel.send(customer, String.format("Online payment of $%.2f received via %s. Thank you!", amount, method));
     }
 }
@@ -51,7 +54,8 @@ class CashOnDeliveryPayment extends PaymentNotification {
     public CashOnDeliveryPayment(NotificationChannel c, String customer, double amount) {
         super(c, customer, amount);
     }
-    @Override public void notifyCustomer() {
+    @Override
+    public void notifyCustomer() {
         channel.send(customer, String.format("Cash on Delivery: Please have $%.2f ready upon arrival.", amount));
     }
 }
@@ -61,7 +65,8 @@ class BitcoinPayment extends PaymentNotification {
         super(c, customer, amount);
         this.txId = txId;
     }
-    @Override public void notifyCustomer() {
+    @Override
+    public void notifyCustomer() {
         channel.send(customer, String.format("Bitcoin payment of $%.2f confirmed. TxId=%s", amount, txId));
     }
 }

@@ -6,10 +6,6 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * TDD flow: each method has a failing test first (disabled for now), then a passing test.
- * Enable the failing ones to see red, then confirm green with the passing version.
- */
 public class DecoratorTest {
 
     private final PrintStream originalOut = System.out;
@@ -26,8 +22,6 @@ public class DecoratorTest {
         System.setOut(originalOut);
     }
 
-    // ========= Burger.description() =========
-
     //    @Disabled("Intentional red test: wrong description")
     @Test void burger_description_failing() {
         FoodItem b = new Burger();
@@ -38,8 +32,6 @@ public class DecoratorTest {
         FoodItem b = new Burger();
         assertEquals("Burger", b.description());
     }
-
-    // ========= Burger.cost() =========
 
     //    @Disabled("Intentional red test: wrong price")
     @Test void burger_cost_failing() {
@@ -52,8 +44,6 @@ public class DecoratorTest {
         assertEquals(5.00, b.cost(), 1e-6);
     }
 
-    // ========= Fries.description() =========
-
     //    @Disabled("Intentional red test")
     @Test void fries_description_failing() {
         FoodItem f = new Fries();
@@ -64,8 +54,6 @@ public class DecoratorTest {
         FoodItem f = new Fries();
         assertEquals("Fries", f.description());
     }
-
-    // ========= Fries.cost() =========
 
     //    @Disabled("Intentional red test")
     @Test void fries_cost_failing() {
@@ -78,8 +66,6 @@ public class DecoratorTest {
         assertEquals(2.50, f.cost(), 1e-6);
     }
 
-    // ========= HotDog.description() =========
-
     //    @Disabled("Intentional red test")
     @Test void hotdog_description_failing() {
         FoodItem h = new HotDog();
@@ -90,8 +76,6 @@ public class DecoratorTest {
         FoodItem h = new HotDog();
         assertEquals("Hot Dog", h.description());
     }
-
-    // ========= HotDog.cost() =========
 
     //    @Disabled("Intentional red test")
     @Test void hotdog_cost_failing() {
@@ -104,8 +88,6 @@ public class DecoratorTest {
         assertEquals(3.50, h.cost(), 1e-6);
     }
 
-    // ========= Ketchup.description() =========
-
     //    @Disabled("Intentional red test")
     @Test void ketchup_description_failing() {
         FoodItem item = new Ketchup(new Burger());
@@ -116,8 +98,6 @@ public class DecoratorTest {
         FoodItem item = new Ketchup(new Burger());
         assertEquals("Burger + Ketchup", item.description());
     }
-
-    // ========= Ketchup.cost() =========
 
     //    @Disabled("Intentional red test")
     @Test void ketchup_cost_failing() {
@@ -130,8 +110,6 @@ public class DecoratorTest {
         assertEquals(5.00 + 0.20, item.cost(), 1e-6);
     }
 
-    // ========= Cheese.description() =========
-
     //    @Disabled("Intentional red test")
     @Test void cheese_description_failing() {
         FoodItem item = new Cheese(new Fries());
@@ -142,8 +120,6 @@ public class DecoratorTest {
         FoodItem item = new Cheese(new Fries());
         assertEquals("Fries + Cheese", item.description());
     }
-
-    // ========= Cheese.cost() =========
 
     //    @Disabled("Intentional red test")
     @Test void cheese_cost_failing() {
@@ -156,8 +132,6 @@ public class DecoratorTest {
         assertEquals(2.50 + 0.50, item.cost(), 1e-6);
     }
 
-    // ========= Onions.description() =========
-
     //    @Disabled("Intentional red test")
     @Test void onions_description_failing() {
         FoodItem item = new Onions(new HotDog());
@@ -169,8 +143,6 @@ public class DecoratorTest {
         assertEquals("Hot Dog + Onions", item.description());
     }
 
-    // ========= Onions.cost() =========
-
     //    @Disabled("Intentional red test")
     @Test void onions_cost_failing() {
         FoodItem item = new Onions(new HotDog());
@@ -181,8 +153,6 @@ public class DecoratorTest {
         FoodItem item = new Onions(new HotDog());
         assertEquals(3.50 + 0.30, item.cost(), 1e-6);
     }
-
-    // ========= Order.add() + Order.subtotal() =========
 
     //    @Disabled("Intentional red test")
     @Test void order_subtotal_failing() {
@@ -201,8 +171,6 @@ public class DecoratorTest {
         assertEquals(12.70, order.subtotal(), 1e-6);
     }
 
-    // ========= Order.printItems() =========
-
     //    @Disabled("Intentional red test")
     @Test void order_printItems_failing() {
         Order order = new Order();
@@ -210,7 +178,7 @@ public class DecoratorTest {
         order.add(item);
         order.printItems();
         String out = capture.toString();
-        assertTrue(out.contains("Burger + Cheese + Ketchup"), "wrong order on purpose");
+        assertTrue(out.contains("Burger + Cheese + Ketchup"), "wrong order");
     }
 
     @Test void order_printItems_passing() {
@@ -223,8 +191,6 @@ public class DecoratorTest {
         assertTrue(out.contains("$5.70"));
     }
 
-    // ========= LoyaltyStatus.applyDiscount() =========
-
     //    @Disabled("Intentional red test")
     @Test void loyalty_applyDiscount_failing() {
         LoyaltyStatus status = new LoyaltyStatus(LoyaltyTier.GOLD); // 10%
@@ -236,8 +202,6 @@ public class DecoratorTest {
         assertEquals(100.0 * 0.90, status.applyDiscount(100.0), 1e-6);
     }
 
-    // ========= LoyaltyStatus.tier() =========
-
     //    @Disabled("Intentional red test")
     @Test void loyalty_tierGetter_failing() {
         LoyaltyStatus status = new LoyaltyStatus(LoyaltyTier.SILVER);
@@ -248,8 +212,6 @@ public class DecoratorTest {
         LoyaltyStatus status = new LoyaltyStatus(LoyaltyTier.SILVER);
         assertEquals(LoyaltyTier.SILVER, status.tier());
     }
-
-    // ========= Stacked decorator sanity (integration) =========
 
     //    @Disabled("Intentional red test")
     @Test void stacked_decorators_failing() {

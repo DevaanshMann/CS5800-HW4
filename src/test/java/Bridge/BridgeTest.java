@@ -7,10 +7,6 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * TDD-style tests: each method has a failing test   (disabled so your suite stays green),
- * followed by a passing test. Enable the failing tests one-by-one to see the red phase.
- */
 public class BridgeTest {
 
     private final PrintStream originalOut = System.out;
@@ -27,8 +23,6 @@ public class BridgeTest {
         System.setOut(originalOut);
     }
 
-    // ---------- EmailChannel.send ----------
-
 //    @Disabled("Intentional red test (TDD): expected wrong channel tag to fail")
     @Test
     void email_send_failing() {
@@ -36,7 +30,7 @@ public class BridgeTest {
         ch.send("user@example.com", "hello");
         String out = capture.toString();
         // Wrong expectation on purpose
-        assertTrue(out.contains("[SMS]"), "Should fail: email output should not be labeled as SMS");
+        assertTrue(out.contains("[SMS]"), "Failed: email output should not be labeled as SMS");
     }
 
     @Test
@@ -47,8 +41,6 @@ public class BridgeTest {
         assertTrue(out.contains("[EMAIL] to user@example.com :: hello"));
     }
 
-    // ---------- SmsChannel.send ----------
-
 //    @Disabled("Intentional red test (TDD): wrong recipient string")
     @Test
     void sms_send_failing() {
@@ -56,7 +48,7 @@ public class BridgeTest {
         ch.send("+1-555-0101", "otp:1234");
         String out = capture.toString();
         // Wrong expectation on purpose
-        assertTrue(out.contains("[SMS] to +1-555-9999 :: otp:1234"), "Should fail: recipient is incorrect");
+        assertTrue(out.contains("[SMS] to +1-555-9999 :: otp:1234"), " Failed: recipient is incorrect");
     }
 
     @Test
@@ -67,8 +59,6 @@ public class BridgeTest {
         assertTrue(out.contains("[SMS] to +1-555-0101 :: otp:1234"));
     }
 
-    // ---------- PushChannel.send ----------
-
 //    @Disabled("Intentional red test (TDD): wrong message body")
     @Test
     void push_send_failing() {
@@ -76,7 +66,7 @@ public class BridgeTest {
         ch.send("device_abc", "ping");
         String out = capture.toString();
         // Wrong expectation on purpose
-        assertTrue(out.contains("[PUSH] to device_abc :: pong"), "Should fail: message is 'ping', not 'pong'");
+        assertTrue(out.contains("[PUSH] to device_abc :: pong"), " Failed: message is 'ping', not 'pong'");
     }
 
     @Test
@@ -87,8 +77,6 @@ public class BridgeTest {
         assertTrue(out.contains("[PUSH] to device_abc :: ping"));
     }
 
-    // ---------- OnlinePaymentNotification.notifyCustomer ----------
-
 //    @Disabled("Intentional red test (TDD): wrong amount formatting")
     @Test
     void online_notify_failing() {
@@ -98,7 +86,7 @@ public class BridgeTest {
         String out = capture.toString();
         // Wrong expectation (integer dollars)
         assertTrue(out.contains("Online payment of $129 received via Credit Card"),
-                "Should fail: implementation prints 2 decimal places");
+                " Failed: implementation prints 2 decimal places");
     }
 
     @Test
@@ -111,8 +99,6 @@ public class BridgeTest {
         assertTrue(out.contains("Online payment of $129.99 received via Credit Card. Thank you!"));
     }
 
-    // ---------- CashOnDeliveryPayment.notifyCustomer ----------
-
 //    @Disabled("Intentional red test (TDD): wrong channel and phrasing")
     @Test
     void cod_notify_failing() {
@@ -121,8 +107,8 @@ public class BridgeTest {
         n.notifyCustomer();
         String out = capture.toString();
         // Wrong expectation on purpose
-        assertTrue(out.contains("[EMAIL]"), "Should fail: COD here uses SMS, not EMAIL");
-        assertTrue(out.contains("have 89 dollars"), "Should fail: message includes $89.00 with decimals");
+        assertTrue(out.contains("[EMAIL]"), " Failed: COD here uses SMS, not EMAIL");
+        assertTrue(out.contains("have 89 dollars"), " Failed: message includes $89.00 with decimals");
     }
 
     @Test
@@ -135,8 +121,6 @@ public class BridgeTest {
         assertTrue(out.contains("Cash on Delivery: Please have $89.00 ready upon arrival."));
     }
 
-    // ---------- BitcoinPayment.notifyCustomer ----------
-
 //    @Disabled("Intentional red test (TDD): wrong tx id and channel")
     @Test
     void bitcoin_notify_failing() {
@@ -145,8 +129,8 @@ public class BridgeTest {
         n.notifyCustomer();
         String out = capture.toString();
         // Wrong expectation on purpose
-        assertTrue(out.contains("[SMS]"), "Should fail: this is PUSH, not SMS");
-        assertTrue(out.contains("TxId=tx_wrong"), "Should fail: tx id should be tx_abc");
+        assertTrue(out.contains("[SMS]"), " Failed: this is PUSH, not SMS");
+        assertTrue(out.contains("TxId=tx_wrong"), " Failed: tx id should be tx_abc");
     }
 
     @Test
