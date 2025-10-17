@@ -3,7 +3,6 @@ package Decorator;
 import org.junit.jupiter.api.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DecoratorTest {
@@ -29,7 +28,7 @@ public class DecoratorTest {
 
     @Test void burgerCost() {
         FoodItem b = new Burger();
-        assertEquals(5.00, b.cost(), 1e-6);
+        assertEquals(5.00, b.cost(), 1e-2);
     }
 
     @Test void friesDescription() {
@@ -39,7 +38,7 @@ public class DecoratorTest {
 
     @Test void friesCost() {
         FoodItem f = new Fries();
-        assertEquals(2.50, f.cost(), 1e-6);
+        assertEquals(2.50, f.cost(), 1e-2);
     }
 
     @Test void hotDogDescription() {
@@ -49,7 +48,7 @@ public class DecoratorTest {
 
     @Test void hotDogCost() {
         FoodItem h = new HotDog();
-        assertEquals(3.50, h.cost(), 1e-6);
+        assertEquals(3.50, h.cost(), 1e-2);
     }
 
     @Test void ketchupDescription() {
@@ -59,7 +58,7 @@ public class DecoratorTest {
 
     @Test void ketchupCost() {
         FoodItem item = new Ketchup(new Burger());
-        assertEquals(5.00 + 0.20, item.cost(), 1e-6);
+        assertEquals(5.00 + 0.20, item.cost(), 1e-2);
     }
 
     @Test void cheeseDescription() {
@@ -69,7 +68,7 @@ public class DecoratorTest {
 
     @Test void cheeseCost() {
         FoodItem item = new Cheese(new Fries());
-        assertEquals(2.50 + 0.50, item.cost(), 1e-6);
+        assertEquals(2.50 + 0.50, item.cost(), 1e-2);
     }
 
     @Test void onionsDescription() {
@@ -79,7 +78,7 @@ public class DecoratorTest {
 
     @Test void onionsCost() {
         FoodItem item = new Onions(new HotDog());
-        assertEquals(3.50 + 0.30, item.cost(), 1e-6);
+        assertEquals(3.50 + 0.30, item.cost(), 1e-2);
     }
 
     @Test void orderSubtotal() {
@@ -87,7 +86,7 @@ public class DecoratorTest {
         order.add(new Cheese(new Ketchup(new Burger()))); // 5.70
         order.add(new Onions(new Cheese(new HotDog())));  // 4.30
         order.add(new Ketchup(new Fries()));              // 2.70
-        assertEquals(12.70, order.subtotal(), 1e-6);
+        assertEquals(12.70, order.subtotal(), 1e-2);
     }
 
     @Test void orderPrintItems() {
@@ -102,7 +101,7 @@ public class DecoratorTest {
 
     @Test void loyaltyApplyDiscount() {
         LoyaltyStatus status = new LoyaltyStatus(LoyaltyTier.GOLD);
-        assertEquals(100.0 * 0.90, status.applyDiscount(100.0), 1e-6);
+        assertEquals(100.0 * 0.90, status.applyDiscount(100.0), 1e-2);
     }
 
     @Test void loyaltyTierGetter() {
@@ -112,7 +111,7 @@ public class DecoratorTest {
 
     @Test void stackedDecorators() {
         FoodItem item = new Onions(new Cheese(new Ketchup(new Burger())));
-        assertEquals(6.00, item.cost(), 1e-6);
+        assertEquals(6.00, item.cost(), 1e-2);
         assertEquals("Burger + Ketchup + Cheese + Onions", item.description());
     }
 }

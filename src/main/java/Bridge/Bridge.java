@@ -22,19 +22,21 @@ interface NotificationChannel {
 class EmailChannel implements NotificationChannel {
     @Override
     public void send(String to, String message) {
-        System.out.println("[EMAIL] to " + to + " :: " + message);
+        System.out.println("EMAIL to " + to + " :: " + message);
     }
 }
+
 class SmsChannel implements NotificationChannel {
     @Override
     public void send(String to, String message) {
-        System.out.println("[SMS] to " + to + " :: " + message);
+        System.out.println("SMS to " + to + " :: " + message);
     }
 }
+
 class PushChannel implements NotificationChannel {
     @Override
     public void send(String to, String message) {
-        System.out.println("[PUSH] to " + to + " :: " + message);
+        System.out.println("PUSH to " + to + " :: " + message);
     }
 }
 
@@ -49,6 +51,7 @@ class OnlinePaymentNotification extends PaymentNotification {
         channel.send(customer, String.format("Online payment of $%.2f received via %s. Thank you!", amount, method));
     }
 }
+
 class CashOnDeliveryPayment extends PaymentNotification {
     public CashOnDeliveryPayment(NotificationChannel c, String customer, double amount) {
         super(c, customer, amount);
@@ -58,6 +61,7 @@ class CashOnDeliveryPayment extends PaymentNotification {
         channel.send(customer, String.format("Cash on Delivery: Please have $%.2f ready upon arrival.", amount));
     }
 }
+
 class BitcoinPayment extends PaymentNotification {
     private final String txId;
     public BitcoinPayment(NotificationChannel c, String customer, double amount, String txId) {

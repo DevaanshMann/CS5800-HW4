@@ -79,6 +79,7 @@ class Cheese extends ToppingDecorator {
         return base.cost() + 0.50;
     }
 }
+
 class Onions extends ToppingDecorator {
     public Onions(FoodItem base) {
         super(base);
@@ -108,18 +109,19 @@ class Order {
 
     public void printItems() {
         for (FoodItem i : items) {
-            System.out.printf(" - %-30s $%.2f%n", i.description(), i.cost());
+            System.out.printf(" - %-40s $%.2f%n", i.description(), i.cost());
         }
     }
 }
 
 enum LoyaltyTier {
-    NONE(0.00), SILVER(0.05), GOLD(0.10), PLATINUM(0.15);
+    NONE(0.00), SILVER(0.05), GOLD(0.10), PLATINUM(0.20);
     final double discountRate;
     LoyaltyTier(double r) {
         this.discountRate = r;
     }
 }
+
 class LoyaltyStatus {
     private final LoyaltyTier tier;
     public LoyaltyStatus(LoyaltyTier tier) {
