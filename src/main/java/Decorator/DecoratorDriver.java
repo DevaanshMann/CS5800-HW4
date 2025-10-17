@@ -12,7 +12,7 @@ public class DecoratorDriver {
         order.add(item2);
         order.add(item3);
 
-        System.out.println("=== DECORATOR DEMO ===");
+        System.out.println("          DECORATOR DEMO");
         order.printItems();
         double subtotal = order.subtotal();
         System.out.printf("Subtotal: $%.2f%n", subtotal);

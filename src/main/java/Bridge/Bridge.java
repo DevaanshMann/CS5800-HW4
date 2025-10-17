@@ -2,7 +2,6 @@ package Bridge;
 
 import java.util.*;
 
-// ===== Abstraction =====
 abstract class PaymentNotification {
     protected final NotificationChannel channel;
     protected final String customer;
