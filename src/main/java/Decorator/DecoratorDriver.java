@@ -2,7 +2,7 @@ package Decorator;
 
 public class DecoratorDriver {
     public static void main(String[] args) {
-        // Build decorated items
+
         FoodItem item1 = new Cheese(new Ketchup(new Burger())); // Burger + Ketchup + Cheese
         FoodItem item2 = new Onions(new Cheese(new HotDog()));  // HotDog + Cheese + Onions
         FoodItem item3 = new Ketchup(new Fries());              // Fries + Ketchup
